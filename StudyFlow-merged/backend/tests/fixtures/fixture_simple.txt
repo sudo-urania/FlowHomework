@@ -1,0 +1,7 @@
+Course: Introduction to Computer Programming (CPT 101)
+Term: Fall 2026
+Assignment Schedule
+2026-11-02 - Homework 4: Variables and Expressions
+Due: 2026-11-05 - Quiz 2: Selection Statements
+2026-11-12 - Programming Project 1: Grade Calculator
+The Grade Calculator project must use variables, conditional statements, and input validation. Submit the source code and a short explanation.

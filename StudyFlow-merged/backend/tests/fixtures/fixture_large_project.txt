@@ -1,0 +1,9 @@
+Course: Software Engineering
+Fall 2026 Syllabus
+Major Project: Student Appointment Booking System
+Due date: November 20, 2026
+Weight: 30% of course grade
+Instructions: Design and implement a working application for booking appointments. Include user stories, a data model, a working prototype, automated tests, and a short demonstration. Submit source code, test evidence, and a report. Teams should plan requirements, design, implementation, testing, and final presentation.
+Other dates:
+2026-11-03 - Requirements quiz
+2026-11-10 - Design review

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>StudyFlow</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<!-- 1. First screen: sign in / create account -->
+<section id="auth" class="auth" hidden>
+  <form class="card authbox" id="auth-form">
+    <h1>StudyFlow</h1>
+    <p id="auth-sub">Welcome back. Sign in to continue.</p>
+    <label id="name-row" hidden>Your name<input name="name" autocomplete="name"></label>
+    <label>Email<input name="email" type="email" required autocomplete="email"></label>
+    <label>Password<input name="pw" type="password" required minlength="6" autocomplete="current-password"></label>
+    <p class="err" id="auth-err" role="alert"></p>
+    <button class="btn pri" type="submit" id="auth-go">Sign in</button>
+    <button class="link" type="button" id="auth-switch">New here? Create an account</button>
+  </form>
+</section>
+ 
+<!-- 2. Dashboard -->
+<div class="app" id="app" hidden>
+  <nav class="side" aria-label="Main">
+    <div class="brand">StudyFlow</div>
+    <!-- Keep the active term for existing saved data; no term selector in the UI. -->
+    <select id="term" hidden aria-label="Term"></select>
+    <button class="nav on" data-view="home" type="button"><span>⌂</span>Home</button>
+    <button class="nav" data-view="cal" type="button"><span>▦</span>Calendar</button>
+    <button class="nav" data-view="tasks" type="button"><span>✓</span>Tasks</button>
+    <div class="spacer"></div>
+    <div class="who"><span id="who"></span><button class="link" id="out" type="button">Sign out</button></div>
+  </nav>
+ 
+  <main class="main">
+    <section id="v-home">
+      <h1 id="greet"></h1>
+      <p class="sub">Ask me anything about your schedule.</p>
+      <div class="card chat">
+        <div class="log" id="log" aria-live="polite"></div>
+        <div class="chips" id="chips"></div>
+        <form class="chatbar" id="chat-form">
+          <input id="msg" placeholder="Ask about your schedule, or request a study plan…" autocomplete="off">
+          <button class="btn pri" type="submit">Send</button>
+        </form>
+      </div>
+    </section>
+ 
+    <section id="v-cal" hidden>
+      <div class="row"><h1>Calendar</h1>
+        <div class="calendar-actions"><button class="btn" id="btn-syl" type="button">＋ Upload syllabus</button><button class="btn pri" id="btn-event" type="button">＋ Add event</button></div>
+        <input type="file" id="syl" accept=".txt,.csv,.md,.pdf,.docx" hidden>
+      </div>
+      <p id="upload-status" class="upload-status" role="status" aria-live="polite">Import a PDF, DOCX, TXT, Markdown, or CSV syllabus. Review assignments before adding them.</p>
+      <div id="calendar-key" class="calendar-key" aria-label="Calendar color key"></div>
+      <div class="card">
+        <div class="row calnav"><button class="ib" id="prev" type="button" aria-label="Previous month">‹</button><h2 id="cal-title"></h2><button class="ib" id="next" type="button" aria-label="Next month">›</button></div>
+        <div class="grid" id="grid"></div>
+      </div>
+    </section>
+ 
+    <section id="v-tasks" hidden>
+      <div class="row"><h1>Tasks</h1><button class="btn pri" id="btn-task" type="button">＋ Add task</button></div>
+      <div id="tasks"></div>
+    </section>
+  </main>
+</div>
+ 
+<dialog id="tdlg">
+  <form method="dialog">
+    <h2>New task</h2>
+    <label>What needs doing?<input name="title" required></label>
+    <label>Course<input name="course" list="clist" placeholder="e.g. Calculus"><datalist id="clist"></datalist></label>
+    <div class="two">
+      <label>Due date<input type="date" name="due"></label>
+      <label>Difficulty<select name="diff"><option value="1">Easy</option><option value="2" selected>Medium</option><option value="3">Hard</option></select></label>
+    </div>
+    <label>Estimated minutes<input type="number" name="min" min="5" step="5" value="45"></label>
+    <div class="row end"><button class="btn" value="cancel" formnovalidate>Cancel</button><button class="btn pri" value="save">Add task</button></div>
+  </form>
+</dialog>
+<dialog id="reviewdlg" class="reviewdlg">
+  <form method="dialog" id="review-form">
+    <h2>Review imported assignments</h2>
+    <p class="muted">Check the extracted information before adding it to your planner. Rows needing review are highlighted. Nothing is saved until you confirm.</p>
+    <div id="import-warnings" class="import-warnings" role="status"></div>
+    <div class="review-scroll"><table class="review-table"><thead><tr><th>Review</th><th>Course</th><th>Assignment title</th><th>Due date</th><th>Difficulty</th><th>Minutes</th><th>Instructions / evidence</th></tr></thead><tbody id="review-rows"></tbody></table></div>
+    <div class="review-footer"><p>Ready? Add the reviewed assignments to Tasks and Calendar.</p><div class="review-footer-actions"><button class="btn" type="button" id="review-cancel">Cancel</button><button class="btn pri" type="button" id="review-confirm">Add to calendar</button></div></div>
+  </form>
+</dialog>
+<div id="toast" role="status"></div>
+
+<!--updated to add availability form--> 
+<script src="availability.js"></script>
+<script src="availability-ui.js"></script>
+<script src="scheduler.js"></script>
+
+<script src="app.js"></script>
+</body>
+</html>
+
+
